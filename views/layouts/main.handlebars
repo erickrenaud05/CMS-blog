@@ -10,18 +10,19 @@
 <body>
     <header class="container col-12 d-flex p-2">
     <nav class="my-2 mx-4">
-        <button class="text p-0" type="button">Home</button>
+        <button class="text p-0" type="button" id="homeBtn">Home</button>
         <button class="text px-4" type="button">Dashboard</button>
         {{#if loggedIn}}
         <button class="text p-0 " type="button">Logout</button>
         {{/if}}
         {{#unless loggedIn}}
-        <button class="text p-0 " type="button">Login</button>
+        <button class="text p-0 " type="button" id="loginBtn">Login</button>
         {{/unless}}
     </nav>
     <h1 class="headerTitle col-5 my-2 mx-4">{{headerTitle}}</h1>
 </header>
-
     {{{body}}}
+    <script src="/js/login.js"></script>
+    <script src="/js/home.js"></script>
 </body>
 </html>

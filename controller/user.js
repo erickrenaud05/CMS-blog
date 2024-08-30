@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../models');
+const path = require('path');
 
 router.post('/login', async(req, res) =>{
     if(!req.body.username || !req.body.password){
@@ -76,6 +77,12 @@ router.get('/logout', async(req, res) => {
     }catch(err){
         return res.status(500).json('Internal server error');
     }
+})
+
+router.get('/login', (req, res) => {
+  res.render('login', {
+    headerTitle: 'Login'
+  });
 })
 
 module.exports = router;
