@@ -60,13 +60,22 @@ router.post('/signup', async(req, res) => {
     
         req.session.save(() => {
           req.session.loggedIn = true;
-    
-          res.status(200).json(dbUserData);
+          res.status(200).json(dbUserData.username);
         });
       } catch (err) {
         console.log(err);
         res.status(500).json(err);
       }
 });
+
+router.get('/logout', async(req, res) => {
+    try{
+        req.session.destroy(()=>{
+            res.status(204).end();
+        })
+    }catch(err){
+        return res.status(500).json('Internal server error');
+    }
+})
 
 module.exports = router;

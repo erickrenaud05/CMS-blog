@@ -3,9 +3,9 @@ const withAuth = require('../utils/auth');
 const { Post, User, Comment } = require('../models');
 
 router.get('/', async(req, res) => {
-    console.log(req.session)
     try{
         const post = await Post.findAndCountAll({
+            attributes: ['title', 'content', 'published_at'],
             limit: 10,
             include: [
                 {model: Comment,
@@ -18,15 +18,12 @@ router.get('/', async(req, res) => {
                     attributes: ['username'],
                 }
             ],
-            attributes: ['title', 'content', 'published_at'],
-            
         });
-
-        if(post.count === 0){
-            return res.status(404).json('No post found');
-        }
-
-        return res.status(200).json(post.rows);
+        const postData = post.rows.map((post) => post.get({ plain:true }))
+        res.render('homepage', {
+            post: postData,
+            loggedIn: req.session.loggedIn,
+        });
 
     }catch(err){
         return res.status(500).json('Internal server error');
