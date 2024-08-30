@@ -5,7 +5,19 @@ router.get('/', async(req, res) => {
     try{
         const post = await Post.findAndCountAll({
             limit: 10,
-            include: {model: Comment, model: User},
+            include: [
+                {model: Comment,
+                    include: {model: User,
+                        attributes: ['username'],
+                    },
+                    attributes: ["content", "publishedAt"],
+                }, 
+                {model: User, 
+                    attributes: ['username'],
+                }
+            ],
+            attributes: ['title', 'content', 'published_at'],
+            
         });
 
         if(post.count === 0){
