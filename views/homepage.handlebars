@@ -1,15 +1,11 @@
-<header class="container col-12 d-flex p-2">
-    <nav class="my-2 mx-4">
-        <button class="text p-0" type="button">Home</button>
-        <button class="text px-4" type="button">Dashboard</button>
-        <button class="text p-0 " type="button">Logout</button>
-    </nav>
-    <h1 class="headerTitle col-5 my-2 mx-4">The Tech Blog</h1>
-</header>
-
-
 {{#each post}}
-<div >
-
-</div>
+    <div class="container my-2 post">
+        <header class="d-flex flex-row justify-space-between p-2">
+            <h3 class="text">{{this.title}}</h3>
+            <p class="text">Posted by {{this.user.username}} on {{this.published_at}}</p>
+        </header>
+        <div>
+            <p class="p-2 text-break">{{this.content}}</p>
+        </div>
+    </div>
 {{/each}}

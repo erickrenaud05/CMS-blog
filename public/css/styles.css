@@ -3,6 +3,10 @@
     --text-color: #D9EAD3;
 }
 
+body{
+    background-color: var(--text-color);
+}
+
 header {
     background-color: var(--header-color);
 }
@@ -25,4 +29,13 @@ button {
     color: var(--header-color);
     box-shadow: 5px 5px #A7A7A7;
     border-radius: 5px;
+}
+
+.post {
+    border: 2px solid var(--header-color);
+    color: var(--header-color);
+}
+
+p {
+    font-weight: 500;
 }

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
 const { Post, User, Comment } = require('../models');
+const { format_date } = require('../utils/helpers');
 
 router.get('/', async(req, res) => {
     try{
@@ -20,9 +21,11 @@ router.get('/', async(req, res) => {
             ],
         });
         const postData = post.rows.map((post) => post.get({ plain:true }))
+        
         res.render('homepage', {
             post: postData,
             loggedIn: req.session.loggedIn,
+            headerTitle: 'The Tech Blog'
         });
 
     }catch(err){
