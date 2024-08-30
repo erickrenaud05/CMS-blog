@@ -43,8 +43,30 @@ router.post('/login', async(req, res) =>{
       }
 });
 
-router.post('/signup', (req, res) => {
-    res.send('POST SIGNUP');
+router.post('/signup', async(req, res) => {
+    const { username, password, firstName, lastName } = req.body;
+    
+    if(!username || !password || !firstName || !lastName){
+        return res.status(400).json('Please fill out entire form');
+    }
+    
+    try {
+        const dbUserData = await User.create({
+          username: username,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+        });
+    
+        req.session.save(() => {
+          req.session.loggedIn = true;
+    
+          res.status(200).json(dbUserData);
+        });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+      }
 });
 
 module.exports = router;
