@@ -1,0 +1,28 @@
+:root{
+    --header-color: #231010;
+    --text-color: #D9EAD3;
+}
+
+header {
+    background-color: var(--header-color);
+}
+
+.text {
+    color: var(--text-color);
+}
+
+ul {
+    list-style-type: none;
+}
+
+button {
+    border: none;
+    background-color: var(--header-color);
+}
+
+.headerTitle {
+    background-color: var(--text-color);
+    color: var(--header-color);
+    box-shadow: 5px 5px #A7A7A7;
+    border-radius: 5px;
+}
