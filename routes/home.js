@@ -1,7 +1,9 @@
 const router = require('express').Router();
+const withAuth = require('../utils/auth');
 const { Post, User, Comment } = require('../models');
 
 router.get('/', async(req, res) => {
+    console.log(req.session)
     try{
         const post = await Post.findAndCountAll({
             limit: 10,
