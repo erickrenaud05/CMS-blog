@@ -1,8 +1,21 @@
 const router = require('express').Router();
 const { Post, User } = require('../models');
 
-router.get('/', (req, res) => {
-    res.send('get main posts');
+router.get('/', async(req, res) => {
+    try{
+        const post = await Post.findAndCountAll({
+            limit: 10,
+        });
+
+        if(post.count === 0){
+            return res.status(404).json('No post found');
+        }
+
+        return res.status(200).json(post.rows);
+
+    }catch(err){
+        return res.status(500).json('Internal server error');
+    }
 })
 
 module.exports = router;
