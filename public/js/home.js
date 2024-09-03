@@ -3,7 +3,7 @@ const homeBtnHandler = async function(event){
         const res = await fetch('/home');
 
         if(!res.ok){
-            throw new Error('noo');
+            throw new Error('Internal server error');
         } else {
             document.location.replace('/home');
         }

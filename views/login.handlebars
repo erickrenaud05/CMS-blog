@@ -1,1 +1,20 @@
-<h3>hello world</h3>
+<div class="card container my-2">
+    <header class="">
+        <h4 class="text p-2">{{formTitle}}</h4>
+    </header>
+    <form class="form container">
+        <label for="username">Username: </label>
+        <br>
+        <input type="text" id="username" class="col-12">
+        <br>
+        <label for="password">Password: </label>
+        <br>
+        <input type="text" id="password" class="col-12">
+        <button type="submit" class="btn col-12 my-2">{{buttonText}}!</button>
+    </form>
+    {{#if signUp}}
+        <button type="button" class="m-1 btn" id="formSwap" state="1"> Login instead! </button>
+        {{else}}
+            <button type="button" class="m-1 btn" id="formSwap" state="2"> Sign up instead! </button>
+    {{/if}}
+</div>

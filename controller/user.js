@@ -79,10 +79,27 @@ router.get('/logout', async(req, res) => {
     }
 })
 
-router.get('/login', (req, res) => {
-  res.render('login', {
-    headerTitle: 'Login'
-  });
+router.get('/login/:id', (req, res) => {
+  const state = req.params.id;
+  
+  if(state === '1'){
+    console.log('good')
+    res.render('login', {
+      headerTitle: 'Login',
+      formTitle: 'Login',
+      buttonText: 'Login',
+      signUp: false,
+    });
+    
+  } else{
+    res.render('login', {
+      headerTitle: 'Sign Up',
+      formTitle: 'Sign Up',
+      buttonText: 'Sign Up',
+      signUp: true,
+    });
+  }
+
 })
 
 module.exports = router;
