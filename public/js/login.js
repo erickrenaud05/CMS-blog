@@ -45,13 +45,26 @@ const formSubmit = async function(event){
             headers: { 'Content-Type': 'application/json' },
         });
 
-        if(!res.ok){
-            throw new Error('Internal server error')
-        } 
+        if(requestType === 'login'){
+            if(!res.ok){
+                alert('invalid user or password');
+                return
+            }
 
+        } else{
+            if(!res.ok){
+                alert('Username already exist');
+                return
+            }
+        }
+
+        alert('successfully logged in!');
         document.location.replace('/home');
+        return;
+
     } catch (err) {
-        console.log(err);
+        console.log('Internal server error');
+        return;
     }
 }
 
