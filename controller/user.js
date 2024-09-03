@@ -55,8 +55,6 @@ router.post('/signup', async(req, res) => {
         const dbUserData = await User.create({
           username: username,
           password: password,
-          firstName: firstName,
-          lastName: lastName,
         });
     
         req.session.save(() => {
@@ -80,8 +78,14 @@ router.get('/logout', async(req, res) => {
 })
 
 router.get('/login/:id', (req, res) => {
+  /*
+    State is a property of the form swap button and allows
+    for a single view and get request for both sign
+    up and login and doesn't require the page to 
+    refresh to change form
+  */
   const state = req.params.id;
-  
+
   if(state === '1'){
     console.log('good')
     res.render('login', {

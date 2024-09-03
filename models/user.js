@@ -25,14 +25,6 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        lastName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         createdAt: {
             type: DataTypes.DATEONLY,
             defaultValue: sequelize.NOW,
