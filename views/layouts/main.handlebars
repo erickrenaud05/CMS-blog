@@ -13,16 +13,16 @@
         <button class="text p-0" type="button" id="homeBtn">Home</button>
         <button class="text px-4" type="button">Dashboard</button>
         {{#if loggedIn}}
-        <button class="text p-0 " type="button">Logout</button>
+            <button class="text p-0 " type="button" id="logoutBtn">Logout</button>
+            {{else}}
+            <button class="text p-0 " type="button" id="loginBtn">Login</button>
         {{/if}}
-        {{#unless loggedIn}}
-        <button class="text p-0 " type="button" id="loginBtn">Login</button>
-        {{/unless}}
+        
     </nav>
     <h1 class="headerTitle col-5 my-2 mx-4">{{headerTitle}}</h1>
 </header>
     {{{body}}}
-    <script src="/js/login.js"></script>
+    <script src="/js/navBar.js"></script>
     <script src="/js/home.js"></script>
 </body>
 </html>

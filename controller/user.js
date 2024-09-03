@@ -45,9 +45,9 @@ router.post('/login', async(req, res) =>{
 });
 
 router.post('/signup', async(req, res) => {
-    const { username, password, firstName, lastName } = req.body;
+    const { username, password} = req.body;
     
-    if(!username || !password || !firstName || !lastName){
+    if(!username || !password){
         return res.status(400).json('Please fill out entire form');
     }
     
@@ -61,6 +61,8 @@ router.post('/signup', async(req, res) => {
           req.session.loggedIn = true;
           res.status(200).json(dbUserData.username);
         });
+        
+        return;
       } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -77,7 +79,7 @@ router.get('/logout', async(req, res) => {
     }
 })
 
-router.get('/login/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   /*
     State is a property of the form swap button and allows
     for a single view and get request for both sign

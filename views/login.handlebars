@@ -10,7 +10,7 @@
         <label for="password">Password: </label>
         <br>
         <input type="text" id="password" class="col-12">
-        <button type="submit" class="btn col-12 my-2">{{buttonText}}!</button>
+        <button type="submit" class="btn col-12 my-2" id="formSubmit">{{buttonText}}!</button>
     </form>
     {{#if signUp}}
         <button type="button" class="m-1 btn" id="formSwap" state="1"> Login instead! </button>
@@ -18,3 +18,4 @@
             <button type="button" class="m-1 btn" id="formSwap" state="2"> Sign up instead! </button>
     {{/if}}
 </div>
+<script src="/js/login.js"></script>

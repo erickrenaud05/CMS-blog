@@ -1,26 +1,14 @@
-const loginHandler = async function(event){
-    try{
-        const res = await fetch(`/user/login/1`);
-
-        if(!res.ok){
-            throw new Error('Internal server error')
-        } else{
-            document.location.replace(`/user/login/1`)
-        }
-    }catch(err){
-        console.log(err);
-    }
-}
 
 const formSwapHandler = async function(event) {
     const state = event.target.getAttribute('state');
+
     try{
-        const res = await fetch(`/user/login/${state}`);
+        const res = await fetch(`/user/${state}`);
 
         if(!res.ok){
             throw new Error('Internal server error')
         } else{
-            document.location.replace(`/user/login/${state}`)
+            document.location.replace(`/user/${state}`)
         }
 
     }catch(err){
@@ -28,10 +16,49 @@ const formSwapHandler = async function(event) {
     }
 }
 
-document
-    .querySelector('#loginBtn')
-    .addEventListener('click', loginHandler);
+const formSubmit = async function(event){
+    event.preventDefault();
+    let state = document.querySelector('#formSwap').getAttribute('state');
+    let requestType = null;
+
+    const username = document.querySelector('#username').value.trim();
+    const password = document.querySelector('#password').value.trim();
+
+    if(!username || !password){
+        alert("please fill out entire form");
+        return;
+    }
+
+    if(state === '1'){
+        requestType = 'signUp'
+    } else{
+        requestType = 'login'
+    }
+
+    try {
+        const res = await fetch(`/user/${requestType}`, {
+            method: 'post',
+            body: JSON.stringify({
+                username,
+                password
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if(!res.ok){
+            throw new Error('Internal server error')
+        } 
+
+        document.location.replace('/home');
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 document
     .querySelector('#formSwap')
     .addEventListener('click', formSwapHandler);
+
+document
+    .querySelector('#formSubmit')
+    .addEventListener('click', formSubmit);
