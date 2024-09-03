@@ -27,7 +27,6 @@ router.get('/', async(req, res) => {
             loggedIn: req.session.loggedIn,
             headerTitle: 'The Tech Blog'
         });
-
     }catch(err){
         return res.status(500).json('Internal server error');
     }

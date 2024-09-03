@@ -4,13 +4,13 @@ const loginHandler = async function(event){
 
         if(!res.ok){
             throw new Error(err)
+        } else{
+            document.location.replace('/user/login')
         }
-        
-        document.location.replace('/user/login');
+
     }catch(err){
         console.log(err);
     }
-    
 }
 
 document

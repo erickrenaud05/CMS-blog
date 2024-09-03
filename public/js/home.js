@@ -4,9 +4,10 @@ const homeBtnHandler = async function(event){
 
         if(!res.ok){
             throw new Error('noo');
+        } else {
+            document.location.replace('/home');
         }
-
-        document.location.replace('/home');
+        
     }catch(err){
         console.log(err);
     }
