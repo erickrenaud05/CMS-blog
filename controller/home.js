@@ -41,17 +41,20 @@ router.get('/:id', async (req, res) => {
     try {
         const response = await Post.findOne({
             where: {title: req.params.id},
-            include: 
+            include: [
             {model: Comment,
                 include: {model: User,
                     attributes: ['username'],
                 },
                 attributes: ["content", "publishedAt"],
             }, 
+            {model: User, 
+                attributes: ['username'],
+            },
+        ]
         });
 
         const posts = await response.toJSON()
-
         res.render('post', {
             post: posts,
             loggedIn: req.session.loggedIn,
