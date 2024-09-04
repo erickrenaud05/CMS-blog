@@ -1,5 +1,6 @@
+<div id="postContainer">
 {{#each post}}
-    <div class="container my-2 post">
+    <section class="container my-2 post" id="{{this.title}}">
         <header class="d-flex flex-row justify-space-between p-2">
             <h4 class="text">{{this.title}}</h4>
             <p class="text ">Posted by {{this.user.username}} on {{this.published_at}}</p>
@@ -7,5 +8,9 @@
         <div>
             <p class="p-2 text-break">{{this.content}}</p>
         </div>
-    </div>
+    </section>
 {{/each}}
+</div>
+
+
+<script src="/js/post.js"></script>
