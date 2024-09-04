@@ -5,7 +5,7 @@ const postClickHandler = async function(event){
         const res = await fetch(`home/${target.id}`);
         
         if(!res.ok){
-            console.log('FuckMe');
+            console.log('Post not found');
             return;
         }
 

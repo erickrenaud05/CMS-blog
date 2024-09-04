@@ -1,5 +1,34 @@
-const addCommentHandler = async function(event){
-    //show form
+const submitCommentHandler = async function(event){
+    const comment = document.querySelector('#newComment').value.trim();
+    const postTitle = document.querySelector('.post').getAttribute('id');
+
+    event.preventDefault()
+    
+    if(!comment || !postTitle){
+        alert('please enter a comment');
+        return;
+    }
+
+    try {
+        const res = await fetch('comment', {
+            method: 'POST',
+            body: JSON.stringify({
+                comment,
+                postTitle,
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if(!res.ok){
+            console.log('Not good');
+            return;
+        }
+
+        document.location.reload();
+    } catch (error) {
+        console.log('not Good');
+        return;
+    }
 };
 
 const showForm = function(event){
@@ -37,8 +66,11 @@ const showForm = function(event){
     form.appendChild(formBtn);
 
     location.insertBefore(container, event.target.parentElement);
+
+    formBtn.addEventListener('click', submitCommentHandler);
 }
 
 document
     .querySelector('#addComment')
     .addEventListener('click', showForm);
+
