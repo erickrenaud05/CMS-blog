@@ -43,3 +43,7 @@ div p {
 header p {
     opacity: 50%;
 }
+
+.commentInput {
+    height: 5rem
+}

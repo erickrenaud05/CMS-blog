@@ -1,5 +1,5 @@
 <div id="postContainer">
-    <section class="container my-2 post" id="{{post.title}}">
+    <section class="container my-2 post" id="thisPost">
         <header class="d-flex flex-row justify-space-between p-2">
             <h4 class="text">{{post.title}}</h4>
             <p class="text ">Posted by {{post.user.username}} on {{post.published_at}}</p>
@@ -8,10 +8,13 @@
             <p class="p-2 text-break">{{post.content}}</p>
         </div>
     </section>
-    <button type="button" class="btn">Add comment</button>
+    <div class="container">
+        <button type="button" class="btn col-12" id="addComment">Add comment</button>
+    </div>
 {{#each post.comment as |comment|}}
     <section class="container my-2 post" id="{{comment.title}}">
 
     </section>
 {{/each}}
 </div>
+<script src="/js/comments.js"></script>
