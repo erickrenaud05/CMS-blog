@@ -23,7 +23,6 @@ router.get('/', async(req, res) => {
         
         res.render('homepage', {
             post: postData,
-            loggedIn: req.session.loggedIn,
             headerTitle: 'The Tech Blog'
         });
     }catch(err){
