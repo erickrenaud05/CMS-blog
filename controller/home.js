@@ -67,6 +67,29 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) =>{
+    if(!req.params.id){
+        res.status(400).json('invalid post id');
+        return;
+    }
+
+    try {
+        const response = Post.destroy({
+            where: {id: req.params.id},
+        })
+
+        if(!response){
+            throw new Error('Weird');
+        }
+
+        res.status(200).json('Successfully deleted post');
+        return;
+    } catch (error) {
+        res.status(500).json('Internal server error');
+        return;
+    }
+})
+
 router.post('/comment', async (req, res) => {
     if(!req.body){
         res.status(400).json('bad request');

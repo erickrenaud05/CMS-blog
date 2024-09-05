@@ -5,11 +5,11 @@ const dashboardPostHandler = async function(event){
         const area = document.querySelector('#dashboardPost');
         area.innerHTML = '';
 
-        renderForm(post.getAttribute('content'), post.getAttribute('title'))
+        renderForm(post.getAttribute('content'), post.getAttribute('title'), post.getAttribute('id'))
     }
 }
 
-function renderForm(content, title){
+function renderForm(content, title, id){
     const formLocation = document.querySelector('#dashboardPost');
     const form = document.createElement('form');
     const formTitleLabel = document.createElement('label');
@@ -22,7 +22,8 @@ function renderForm(content, title){
     const container = document.createElement('div');
 
     formLocationHeader.setAttribute('class', 'd-flex flex-row justify-space-between p-2 text');
-    container.setAttribute('class', 'container my-2 post')
+    container.setAttribute('class', 'container my-2 post');
+    container.setAttribute('id', `${id}`);
     form.setAttribute('class', 'p-2 form');
     formTitleLabel.setAttribute('class', 'my-2 ps-0');
     formTitleLabel.setAttribute('for', 'titleInput');
@@ -52,8 +53,39 @@ function renderForm(content, title){
     container.append(formLocationHeader, form)
     form.append(formTitleLabel, formTitleInput, formContentLabel, formContentInput, formBtn, formDeleteBtn)
     formLocation.append(container);
+
+    formBtn.addEventListener('click', updatePostHandler);
+    formDeleteBtn.addEventListener('click', deletePostHandler);
 }
 
+const updatePostHandler = async function(event){
+
+}
+
+const deletePostHandler = async function(event){
+    const confirmation = confirm('Are you sure you would like to delete this post, this action is permanent')
+
+    if(!confirmation){
+        alert('Ok, your post was not deleted:)');
+        return;
+    }
+
+    const postId = event.target.closest('div').getAttribute('id');
+    try {
+        const res = await fetch(`home/${postId}`, {
+            method: 'DELETE'
+        })
+
+        if(!res.ok){
+            throw new Error('weird');
+        }
+
+        alert('Successfully deleted your post');
+        return;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 document
     .querySelector('#dashboardPost')
