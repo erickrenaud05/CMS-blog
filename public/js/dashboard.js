@@ -91,7 +91,7 @@ const createPostHandler = async function(event){
     }
 
     try {
-        const response = await fetch('home', {
+        const response = await fetch('post', {
             method: 'POST',
             body:  JSON.stringify({
                 postTitle,
@@ -125,7 +125,7 @@ const deletePostHandler = async function(event){
 
     const postId = event.target.closest('div').getAttribute('id');
     try {
-        const res = await fetch(`home/${postId}`, {
+        const res = await fetch(`post/${postId}`, {
             method: 'DELETE'
         })
 
