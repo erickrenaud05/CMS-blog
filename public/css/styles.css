@@ -47,3 +47,8 @@ header p {
 .commentInput {
     height: 5rem
 }
+
+.myPost {
+    background-color: grey;
+    border-radius: 5px;
+}

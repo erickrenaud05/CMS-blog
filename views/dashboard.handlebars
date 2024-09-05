@@ -1,0 +1,10 @@
+<div class="container" id="dashboardPost">
+{{#each posts as |post|}}
+    {{!-- <p>{{post.id}}--{{post.title}}--{{post.content}}--{{post.authorId}}--{{post.publishedAt}}</p> --}}
+    <div class="container m-2 d-flex flex-row justify-space-between myPost" id="{{post.id}}" content="{{post.content}}" title="{{post.title}}">
+        <h5 class="col-5 m-2">{{post.title}}</h5>
+        <h5 class="col-5 text-right m-2">{{post.publishedAt}}</h5>
+    </div>
+{{/each}}
+</div>
+<script src="/js/dashboard.js"></script>
