@@ -29,7 +29,7 @@ const logoutHandler = async function(event){
 
 const dashboardHandler = async function(event){
     try {
-        const res = await fetch('user/dashboard');
+        const res = await fetch('/user/dashboard');
 
         if(!res.ok){
             throw new Error('sad:(');
