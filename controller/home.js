@@ -73,11 +73,40 @@ router.delete('/:id', async (req, res) =>{
         return;
     }
 
+    let user = null;
     try {
-        const response = Post.destroy({
-            where: {id: req.params.id},
-        })
+        user = await User.findOne({
+            where: {username: req.session.username},
+            attributes: ['id'],
+            raw: true,
+        });
 
+        if(!user){
+            throw new Error('Weird');
+        }
+        
+    } catch (error) {
+        res.status(500).json('Internal server error');
+        return;
+    }
+
+    try {
+        const post = await Post.findOne({
+            where: {id: req.params.id},
+            raw: true,
+        })
+        
+
+        if(!post.authorId === user.id){
+            res.status(401).json('Cannot delete post you do not own');
+            return;
+        }
+
+        const response = await Post.destroy({
+            where: {id: post.id},
+            force: true,
+        });
+        
         if(!response){
             throw new Error('Weird');
         }
