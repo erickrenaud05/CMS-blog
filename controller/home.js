@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { withAuth } = require('../utils/auth');
 const { Post, User, Comment } = require('../models');
 
-router.get('/', withAuth, async(req, res) => {
+router.get('/', async(req, res) => {
     try{
         const post = await Post.findAndCountAll({
             attributes: ['title', 'content', 'published_at'],
@@ -31,7 +31,7 @@ router.get('/', withAuth, async(req, res) => {
     }
 })
 
-router.post('/comment', async (req, res) => {
+router.post('/comment', withAuth, async (req, res) => {
     if(!req.body){
         res.status(400).json('bad request');
         return;

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
+const { withAuth } = require('../utils/auth');
 
 router.get('/:id', async (req, res) => {
     if(!req.params.id){
@@ -36,7 +37,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) =>{
+router.delete('/:id', withAuth, async (req, res) =>{
     if(!req.params.id){
         res.status(400).json('invalid post id');
         return;
@@ -88,7 +89,7 @@ router.delete('/:id', async (req, res) =>{
     }
 })
 
-router.post('/', async(req, res) =>{
+router.post('/', withAuth, async(req, res) =>{
     const { postTitle, postContent} = req.body;
 
     if(!postTitle || !postContent){
@@ -132,7 +133,7 @@ router.post('/', async(req, res) =>{
     }
 })
 
-router.put('/', async(req, res) => {
+router.put('/', withAuth, async(req, res) => {
     const { id, title, content} = req.body;
 
     if(!id || !title || !content){

@@ -24,6 +24,11 @@ const submitCommentHandler = async function(event){
             return;
         }
 
+        if(res.redirected){
+            document.location.replace(res.url);
+            return;
+        }
+
         document.location.reload();
     } catch (error) {
         console.log('not Good');
