@@ -58,7 +58,7 @@ router.get('/:id', async (req, res) => {
         res.render('post', {
             post: posts,
             loggedIn: req.session.loggedIn,
-            headerTitle: res.title
+            headerTitle: 'The Tech Blog'
         })
         return;
     } catch (error) {
@@ -72,11 +72,11 @@ router.post('/comment', async (req, res) => {
         res.status(400).json('bad request');
         return;
     }
+
     let foreignKeys = {
         userId: null,
         postId: null,
     };
-
 
     try {
         var response = await User.findOne({

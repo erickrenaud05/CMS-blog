@@ -27,7 +27,24 @@ const logoutHandler = async function(event){
     }
 }
 
+const dashboardHandler = async function(event){
+    try {
+        const res = await fetch('user/dashboard');
+
+        if(!res.ok){
+            throw new Error('sad:(');
+        }
+
+        document.location.replace('/dashboard')
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const btn = document.querySelector('#loginBtn');
+const dashboardBtn = document.querySelector('#dashboardBtn');
+
+dashboardBtn.addEventListener('click', dashboardHandler);
 
 if(btn){
     btn.addEventListener('click', loginHandler);
