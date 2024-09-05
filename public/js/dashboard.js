@@ -1,4 +1,12 @@
 const dashboardPostHandler = async function(event){
+    if(event.target.id === 'createPostForm'){
+        const area = document.querySelector('#dashboardPost');
+        area.innerHTML = '';
+
+        renderForm();
+        return;
+    }
+    
     const post = event.target.closest('div');
 
     if(post.getAttribute('content')){
@@ -6,7 +14,7 @@ const dashboardPostHandler = async function(event){
         area.innerHTML = '';
 
         renderForm(post.getAttribute('content'), post.getAttribute('title'), post.getAttribute('id'))
-    }
+    } 
 }
 
 function renderForm(content, title, id){
@@ -38,24 +46,69 @@ function renderForm(content, title, id){
     formDeleteBtn.setAttribute('type', 'submit');
     formDeleteBtn.setAttribute('class', 'btn col-12 mt-1');
 
-    formLocationHeader.innerHTML = 'Edit Post';
-
-    formTitleLabel.innerHTML = 'Title:';
-    formContentLabel.innerHTML = 'Content:';
-
-    formTitleInput.defaultValue = title;
-    formContentInput.defaultValue = content;
-
-    formBtn.innerHTML = 'Update Post';
-    formDeleteBtn.innerHTML = 'Delete Post';
-
-
     container.append(formLocationHeader, form)
-    form.append(formTitleLabel, formTitleInput, formContentLabel, formContentInput, formBtn, formDeleteBtn)
-    formLocation.append(container);
+    form.append(formTitleLabel, formTitleInput, formContentLabel, formContentInput, formBtn)
+    formLocation.insertBefore(container, document.querySelector('#createPostBtn'));
 
-    formBtn.addEventListener('click', updatePostHandler);
-    formDeleteBtn.addEventListener('click', deletePostHandler);
+    if(!content && !title){
+        formLocationHeader.innerHTML = 'Create Post';
+
+        formTitleLabel.innerHTML = 'Title:';
+        formContentLabel.innerHTML = 'Content:';
+
+        formBtn.innerHTML = 'Create Post';
+
+        formBtn.addEventListener('click', createPostHandler);
+    } else{
+        formLocationHeader.innerHTML = 'Edit Post';
+
+        formTitleLabel.innerHTML = 'Title:';
+        formContentLabel.innerHTML = 'Content:';
+    
+        formTitleInput.defaultValue = title;
+        formContentInput.defaultValue = content;
+    
+        formBtn.innerHTML = 'Update Post';
+        formDeleteBtn.innerHTML = 'Delete Post';
+
+        
+        formBtn.addEventListener('click', updatePostHandler);
+        formDeleteBtn.addEventListener('click', deletePostHandler);
+
+        form.appendChild(formDeleteBtn);
+    }
+
+}
+
+const createPostHandler = async function(event){
+    const postTitle = document.querySelector('#titleInput').value.trim();
+    const postContent = document.querySelector('#contentInput').value.trim();
+
+    if(!postTitle || !postContent){
+        event.preventDefault()
+        alert('Please fill out entire form');
+        return;
+    }
+
+    try {
+        const response = await fetch('home', {
+            method: 'POST',
+            body:  JSON.stringify({
+                postTitle,
+                postContent,
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if(!response.ok){
+            throw new Error('oh no')
+        }
+
+        
+    } catch (error) {
+        console.log(error);
+    }
+
 }
 
 const updatePostHandler = async function(event){
@@ -86,6 +139,10 @@ const deletePostHandler = async function(event){
         console.log(error);
     }
 }
+
+// document
+//     .querySelector('#createPostBtn')
+//     .addEventListener('click', renderForm);
 
 document
     .querySelector('#dashboardPost')

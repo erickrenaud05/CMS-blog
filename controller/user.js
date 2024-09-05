@@ -88,7 +88,6 @@ router.get('/:id', (req, res) => {
   const state = req.params.id;
 
   if(state === '1'){
-    console.log('good')
     res.render('login', {
       headerTitle: 'Login',
       formTitle: 'Login',

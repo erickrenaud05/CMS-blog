@@ -32,6 +32,50 @@ router.get('/', withAuth, async(req, res) => {
     }
 })
 
+router.post('/', async(req, res) =>{
+    const { postTitle, postContent} = req.body;
+
+    if(!postTitle || !postContent){
+        res.status(400).json('Invalid request');
+        return;
+    }
+    let user = null;
+    try {
+        const response = await User.findOne({
+            where: {username: req.session.username},
+            attributes: ['id'],
+            raw: true,
+        })
+
+        user = response;
+    } catch (error) {
+        res.status(500).json('Internal server error');
+        return;
+    }
+
+    if(!user){
+        res.status(400).json('user not found');
+        return
+    }
+    
+    const post = {
+        title: postTitle,
+        content: postContent,
+        authorId: user.id,
+        publishedAt: Date.now(),
+    }
+
+    try {
+        const response = await Post.create(post);
+
+        res.status(200).json('Post created')
+        return;
+    } catch (error) {
+        res.status(500).json('Internal server error');
+        return;
+    }
+})
+
 router.get('/:id', async (req, res) => {
     if(!req.params.id){
         res.status(400).json('invalid post id');
