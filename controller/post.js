@@ -133,4 +133,34 @@ router.post('/', async(req, res) =>{
     }
 })
 
+router.put('/', async(req, res) => {
+    const { id, title, content} = req.body;
+
+    if(!id || !title || !content){
+        res.status(400).json('Invalid request');
+        return;
+    }
+
+    try {
+        const post = await Post.findByPk(id);
+
+        if(!post){
+            res.status(404).json('Cant find post');
+            return;
+        }
+
+        await post.update({
+            title,
+            content
+        });
+
+        res.status(200).json('Successfully updated');
+        return;
+    } catch (error) {
+        res.status(500).json('Invalid server error');
+        return
+    }
+   
+})
+
 module.exports = router;

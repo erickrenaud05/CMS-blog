@@ -83,9 +83,10 @@ function renderForm(content, title, id){
 const createPostHandler = async function(event){
     const postTitle = document.querySelector('#titleInput').value.trim();
     const postContent = document.querySelector('#contentInput').value.trim();
+    event.preventDefault()
 
     if(!postTitle || !postContent){
-        event.preventDefault()
+        
         alert('Please fill out entire form');
         return;
     }
@@ -104,7 +105,7 @@ const createPostHandler = async function(event){
             throw new Error('oh no')
         }
 
-        
+        document.location.reload()
     } catch (error) {
         console.log(error);
     }
@@ -112,7 +113,32 @@ const createPostHandler = async function(event){
 }
 
 const updatePostHandler = async function(event){
+    event.preventDefault()
+    const postId = event.target.closest('div').getAttribute('id');
 
+    const formTitle = document.querySelector('#titleInput').value.trim()
+    const formContent = document.querySelector('#contentInput').value.trim()
+
+    if(!postId){
+        console.log('error');
+        return
+    }
+
+    try {
+        const res = await fetch('post', {
+            method: 'PUT',
+            body: JSON.stringify({
+                id: postId,
+                title: formTitle,
+                content: formContent
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        })
+
+        document.location.reload()
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const deletePostHandler = async function(event){
@@ -139,6 +165,7 @@ const deletePostHandler = async function(event){
         console.log(error);
     }
 }
+
 
 // document
 //     .querySelector('#createPostBtn')
