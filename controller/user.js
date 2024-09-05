@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User } = require('../models');
-const path = require('path');
 
 router.post('/login', async(req, res) =>{
     if(!req.body.username || !req.body.password){

@@ -2,14 +2,14 @@ const postClickHandler = async function(event){
     const target= event.target.closest('section')
 
     try{
-        const res = await fetch(`post/${target.id}`);
+        const res = await fetch(`/post/${target.id}`);
         
         if(!res.ok){
             console.log('Post not found');
             return;
         }
 
-        document.location.replace(`home/${target.id}`)
+        document.location.replace(`post/${target.id}`)
     } catch(err) {
         return;
     }

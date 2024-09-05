@@ -10,7 +10,7 @@ const submitCommentHandler = async function(event){
     }
 
     try {
-        const res = await fetch('comment', {
+        const res = await fetch('/home/comment', {
             method: 'POST',
             body: JSON.stringify({
                 comment,
