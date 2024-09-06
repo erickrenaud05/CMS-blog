@@ -7,10 +7,12 @@
 [Questions](#questions)
 
 ## Description
-This is a cms style blog. To use it, create an account and you can view any post on the home page by simply scrolling through. You can post your own posts as well from the dashboard.
+This is a cms style blog. A site for developers to write about tech and give there thoughts and opinions about others blog posts. 
 
 ## Usage
-To use to blog, simply visit --Website link here. From here you will have to create an account consisting of a username and password. Once logged in you will be redirected to the home page where you will be able to view any post other users have made. To view comments, click on the post you are interested in. In this page, you will see the comments others have made and be able to add your own comments by pressing add comments. If you navigate to the dashboard, you will be able to create your own post. And view post you've already created. If you click on one of your previous posts, you will have the options to update the posts content or delete said post.
+To use to blog, simply visit https://cms-blog-frix.onrender.com. From here you can view the homepage where others posts are displayed and view there comments by clicking on the post you wish to see. Once logged in you will be able to add your own comments and post. To create your own post, navigate to the dashboard and press create post and fill out the title and content. At the dashboard you will be able to view post you've already created. If you click on one of your previous posts, you will have the options to update the posts content or delete said post. The following is a screenshot of the homepage and dashboard:
+[homepage](websiteSS\homepage.png.jpeg)
+[Dashboard](websiteSS\dashboard.png.jpeg)
 
 ## License
 Please refer to license in repo or badge area
