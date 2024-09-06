@@ -27,6 +27,8 @@ function renderForm(content, title, id){
     const formBtn = document.createElement('button');
     const formDeleteBtn = document.createElement('button');
     const formLocationHeader = document.createElement('header');
+    const headerText = document.createElement('div');
+    const headerBtn = document.createElement('button');
     const container = document.createElement('div');
 
     formLocationHeader.setAttribute('class', 'd-flex flex-row justify-space-between p-2 text');
@@ -46,12 +48,16 @@ function renderForm(content, title, id){
     formDeleteBtn.setAttribute('type', 'submit');
     formDeleteBtn.setAttribute('class', 'btn col-12 mt-1');
 
+    headerBtn.innerHTML = 'X';
+    headerBtn.setAttribute('class', 'text');
+
+    formLocationHeader.append(headerText, headerBtn);
     container.append(formLocationHeader, form)
     form.append(formTitleLabel, formTitleInput, formContentLabel, formContentInput, formBtn)
     formLocation.insertBefore(container, document.querySelector('#createPostBtn'));
 
     if(!content && !title){
-        formLocationHeader.innerHTML = 'Create Post';
+        headerText.innerHTML = 'Create Post';
 
         formTitleLabel.innerHTML = 'Title:';
         formContentLabel.innerHTML = 'Content:';
@@ -60,7 +66,7 @@ function renderForm(content, title, id){
 
         formBtn.addEventListener('click', createPostHandler);
     } else{
-        formLocationHeader.innerHTML = 'Edit Post';
+        headerText.innerHTML = 'Edit Post';
 
         formTitleLabel.innerHTML = 'Title:';
         formContentLabel.innerHTML = 'Content:';
@@ -77,6 +83,10 @@ function renderForm(content, title, id){
 
         form.appendChild(formDeleteBtn);
     }
+
+    headerBtn.addEventListener('click', ()=>{
+        document.location.reload();
+    })
 
 }
 

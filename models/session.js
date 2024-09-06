@@ -9,7 +9,6 @@ Session.init({
       type: DataTypes.STRING,
       primaryKey: true
     },
-    user_id: DataTypes.STRING, // Adjust according to your session store schema
     expires: DataTypes.DATE,
     data: DataTypes.TEXT
   }, {
