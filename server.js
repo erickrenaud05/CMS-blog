@@ -3,6 +3,7 @@ const path = require('path');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const cleanUp = require('./config/cleanUp');
 
 const sequelize = require('./config/connection');
 const routes = require('./controller');
@@ -16,7 +17,7 @@ const sess = {
   cookie: { maxAge: 30000},
   resave: false,
   rolling: true,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new SequelizeStore({
     db: sequelize,
   }),
@@ -42,3 +43,5 @@ app.use('*', (req, res)=>{
 sequelize.sync({alter: true}).then(() =>{
   app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 });
+
+setInterval(cleanUp, 10 * 60 * 1000) //Deletes expired sessions every 10 minutes
